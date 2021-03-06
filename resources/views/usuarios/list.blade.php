@@ -13,8 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h1 class="text-center"> Seja Bem Vindo!!!</h1>
-                    <a href="{{ url('usuarios_list')}}">Lista dos Usuarios</a>
+                    <h1 class="text-center"> Lista dos usuários!!!!!</h1>
                 </div>
             </div>
         </div>
