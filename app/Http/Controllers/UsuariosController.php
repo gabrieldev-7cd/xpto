@@ -3,13 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Usuarios;
 use Redirect;
+use Maatwebsite\Excel\Facades\Excel; //-> Excel Lib;
+use App\Exports\UsuariosExport;
 
 class UsuariosController extends Controller
 {
     public function index(){
-        $usuarios = Usuarios:: get();
+        $usuarios = DB :: table('usuarios')->simplePaginate(5);
+        // dd($usuarios);
+
+        // $usuarios = Usuarios:: get();
         return view('usuarios.list', ['usuarios' => $usuarios]);
     }
 
@@ -45,4 +51,10 @@ class UsuariosController extends Controller
         return redirect('usuarios_list')->with('message',['type' => 'success', 'msg' => 'Usuário '.$usuario->nome.', deletado com sucesso!']);
 
     }
+
+    public function export() 
+    {
+        return Excel::download(new UsuariosExport, 'users.xlsx');
+    }
+
 }

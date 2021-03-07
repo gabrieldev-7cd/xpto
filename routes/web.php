@@ -15,3 +15,5 @@ Route::post('/usuarios/add', [App\Http\Controllers\UsuariosController::class, 'a
 Route::get('/usuarios/{id}/edit', [App\Http\Controllers\UsuariosController::class, 'edit'])->middleware('auth');
 Route::post('/usuarios/update/{id}', [App\Http\Controllers\UsuariosController::class, 'update'])->middleware('auth');
 Route::delete('/usuarios/delete/{id}', [App\Http\Controllers\UsuariosController::class, 'delete'])->middleware('auth');
+
+Route::get('/usuarios/export/', [App\Http\Controllers\UsuariosController::class, 'export'])->name("excel");

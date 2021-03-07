@@ -17,36 +17,44 @@
                         </div>
                     @endif
                     <h1 class="text-center"> Listagem de usuarios</h1>
-                    <table class="table">
-                        <thead>
-                            <tr class="text-center mx-auto">
-                            <th scope="col">ID</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Opções</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($usuarios as $u)
-                            <tr class="text-center">
-                            <th> {{$u->id}} </th>
-                            <td>{{ $u->nome }}</td>
-                            <td>{{ $u->email }}</td>
-                            <td class="align-center">
-                                <div class="row align-center">
-                                    <a class="btn btn-success btn-sm  ml-2">show</a>
-                                    <a href="usuarios/{{ $u->id }}/edit" class="btn btn-info btn-sm ml-2">Up</a>
-                                    <form action="usuarios/delete/{{ $u->id }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-danger btn-sm ml-2" >Del</button>
-                                    </form>
-                                </div>
-                            </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                    <p>Testar Excel abaixo</p>
+                    <a href="{{ route('excel') }}">Gerar</a>
+                    <div class="content">
+                        <table class="table">
+                            <thead>
+                                <tr class="text-center mx-auto">
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Opções</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <div class="container">
+                                @foreach($usuarios as $u)
+                                    <tr class="text-center">
+                                    <th> {{$u->id}} </th>
+                                    <td>{{ $u->nome }}</td>
+                                    <td>{{ $u->email }}</td>
+                                    <td class="align-center">
+                                        <div class="row align-center">
+                                            <a class="btn btn-success btn-sm  ml-2">show</a>
+                                            <a href="usuarios/{{ $u->id }}/edit" class="btn btn-info btn-sm ml-2">Up</a>
+                                            <form action="usuarios/delete/{{ $u->id }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger btn-sm ml-2" >Del</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    </tr>
+                                @endforeach
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+                        {{ $usuarios->links() }}
+                 
                 </div>
             </div>
         </div>
