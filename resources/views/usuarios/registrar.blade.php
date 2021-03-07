@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registro de Usuario') }}</div>
+                <div class="card-header"><a class="btn btn-primary" href="{{ url('/usuarios_list') }}">Back</a></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -15,7 +15,7 @@
                     @endif
                     
                     @if( Request :: is('*/edit'))
-                        <form action="{{ url('usuarios/edit') }}" method="post">
+                        <form action="{{ url('usuarios/update') }}/{{$usuarios->id}}" method="post">
                         @csrf
                             <div class="mb-3">
                                 <label for="nome" class="form-label">Nome:</label>

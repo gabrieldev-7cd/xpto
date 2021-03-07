@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div id="app">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,16 +9,17 @@
                 <div class="card-header"> <a class="btn btn-primary" href="{{ url('usuarios/new') }}">Cadastrar novo usuário</a></div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                    @if (session('message'))
+                        <div class="alert alert-{{session('message')['type']}}" role="alert">
+                            {{session('message')['msg']}} 
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
                         </div>
                     @endif
-                    <h1 class="text-center"> Lista dos usuários!!!!!</h1>
-
+                    <h1 class="text-center"> Listagem de usuarios</h1>
                     <table class="table">
                         <thead>
-                            <tr class="text-center">
+                            <tr class="text-center mx-auto">
                             <th scope="col">ID</th>
                             <th scope="col">Nome</th>
                             <th scope="col">E-mail</th>
@@ -27,22 +29,28 @@
                         <tbody>
                         @foreach($usuarios as $u)
                             <tr class="text-center">
-                            <th scope="row"> {{$u->id}} </th>
+                            <th> {{$u->id}} </th>
                             <td>{{ $u->nome }}</td>
                             <td>{{ $u->email }}</td>
-                            <td>
-                                <a class="btn btn-success btn-sm">show</a>
-                                <a href="usuarios/{{ $u->id }}/edit" class="btn btn-info btn-sm">Up</a>
-                                <a class="btn btn-danger btn-sm">Del</a>
+                            <td class="align-center">
+                                <div class="row align-center">
+                                    <a class="btn btn-success btn-sm  ml-2">show</a>
+                                    <a href="usuarios/{{ $u->id }}/edit" class="btn btn-info btn-sm ml-2">Up</a>
+                                    <form action="usuarios/delete/{{ $u->id }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-danger btn-sm ml-2" >Del</button>
+                                    </form>
+                                </div>
                             </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
